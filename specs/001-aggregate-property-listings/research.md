@@ -186,3 +186,151 @@ than copying Zelo-specific commands.
 | Rating | No overall score or ranking | Show only source-attributed factual highlights |
 | Database host | PostgreSQL through Prisma; provider not selected | Compare Prisma Postgres and Fly Managed Postgres for region, cost, backups, and latency |
 | PWA offline behavior | Installable shell; no offline listing guarantee | Add offline listing support only through a separate requirement |
+
+## Agent Authoring Tools
+
+**Decision**: Install [Impeccable](https://github.com/pbakaus/impeccable) for frontend work and
+[Humanizer](https://github.com/blader/humanizer) for generated prose at repository scope. Route
+them through Copilot's repository-wide and path-specific instructions; see
+[agent tooling](../../.github/README.md) for installation, versions, and usage.
+
+**Rationale**: Impeccable provides design playbooks and UI review guidance. Humanizer edits prose
+for clarity without changing its meaning. They complement, rather than replace, focused tests,
+rendered UI inspection, source attribution, and the project's no-guessing rules.
+
+**Alternatives considered**: Links alone would depend on agents fetching guidance each time;
+global installations would not travel with the repository. An application-level text-processing
+service is not requested and would need separate runtime and provenance requirements.
+
+Keep the upstream Apache-2.0 and MIT notices. Automatic hooks remain disabled pending review.
+Humanizer must preserve Spec Kit structure and requirement semantics; Impeccable must not invent
+branding, product facts, or a new scope. Product context and visual direction should be approved
+before the first UI implementation.
+
+## Public Mobbin Flow Research
+
+Research date: 2026-11-15. This is inspiration from shipped products, not evidence that these
+flows improve conversion, satisfy accessibility standards, or have been tested with Rentora users.
+
+### Access and evidence limits
+
+[Mobbin](https://mobbin.com/) describes a reference library of shipped screens and ordered flows.
+Its public [explore page](https://mobbin.com/explore/mobile) exposes selected examples and asks
+visitors to log in or join to continue browsing. Full search and flow access depend on the
+account/plan; MCP access is advertised for paid plans. No account was created, no subscription
+was purchased, and no access controls were bypassed.
+
+After the user authenticated the shared browser, the supplied
+[Glassdoor iOS catalog](https://mobbin.com/apps/glassdoor-ios-2e961328-3791-42e9-abbc-47bf48fe3505/d4041b83-7474-4794-ae05-90b515aab5c4/screens)
+was accessible. It reported 390 screens and exposed three highlight previews. The
+[flows tab](https://mobbin.com/apps/glassdoor-ios-2e961328-3791-42e9-abbc-47bf48fe3505/d4041b83-7474-4794-ae05-90b515aab5c4/flows)
+reported 118 flows, but full catalog access still required an upgrade. The earlier
+`/apps/glassdoor` 404 was an incorrect route, not evidence of catalog absence.
+Only the three visible screenshots were inspected; no full search/filter/detail transition
+sequence was verified.
+
+The observations below distinguish a rendered screenshot from Mobbin's published flow
+descriptions. Capture dates and current product versions were not available in the inspected
+material. The Glassdoor collection selector said "Latest", but an exact capture date and app
+version were not verified. Do not describe these as current live-product behavior.
+
+### References and scope fit
+
+| Reference | Evidence inspected | Relevant pattern | Rentora adaptation and exclusions |
+|---|---|---|---|
+| [Airbnb iOS map screen](https://mobbin.com/explore/screens/ff9ec8e7-5b5f-49b9-8053-30757e0d321c) | Rendered public screen: search/filter controls above a map, category strip, price pins, a selected property card, and a "See similar" action | Location context and a concise item preview can coexist; filters remain identifiable while exploring | Retain location/filter context with factual cards. Do not copy price pins, favorites, guest-favorite badges, star ratings, booking dates, or the recommendation action. Rentora selects municipalities and has one result list |
+| [On: filtering products](https://mobbin.com/explore/flows/d33b48fe-e97b-4915-bb49-29e4afe9b716) | Public six-screen flow metadata and description: menu, category/activity/type filtering, then filtered listing | Named categories narrow a result set and return to a listing | Use rent/sale, house/apartment, and supported neighborhood filters. The description does not establish apply/reset semantics, focus behavior, or retained scroll position |
+| [Turo: filtering cars](https://mobbin.com/explore/flows/4e15f54c-7a7f-4ac5-a54d-769a251f4b8f) | Public seven-screen flow metadata and description: vehicle type/year choices, then filtered car listing | Attribute selection leads to a filtered list | The structure supports Rentora's existing attribute filters. Do not add vehicle-style ranges, booking, payment, or extra property filters merely because another marketplace has them |
+| [Nextdoor alert detail](https://mobbin.com/explore/screens/fffdd381-a09f-460e-838d-049314184180) | Public real-estate category listing labels an alert-detail screen with map/map-pin tags; screenshot not inspected | A comparison boundary, not an adopted pattern | Neighborhood/community alerts and exact pins do not match the read-only Phase 1 scope |
+| [Glassdoor splash preview](https://mobbin.com/screens/7a0ecc3a-e568-433f-aab9-b0463f425c34) | Rendered highlight: wordmark on a green background | Brand introduction only; no discovery behavior visible | Does not establish a Rentora palette or justify an additional splash step |
+| [Glassdoor home/results preview](https://mobbin.com/screens/08dbbd95-789e-409c-9084-37b51c13f9eb) | Rendered highlight: search entry, personalized greeting, stacked job cards with employer, role, location, compensation source label and relative age; ratings, bookmarks and bottom navigation also appear | Repeated card hierarchy makes attributes comparable; compensation provenance is visible beside the value | Use consistent factual card fields and visible source labels when data is permitted. Do not add personalized recommendations, ratings, bookmarks, community tabs, or estimated property values |
+| [Glassdoor job-detail preview](https://mobbin.com/screens/ffc295c8-0b7c-43b4-9a6d-a3e31829c1f1) | Rendered highlight: item title and location, employer/rating, qualification section, AI resume-match prompt, back/share controls and prominent application action | Detail context remains identifiable and a next action is easy to find | Keep Rentora's municipality, listing identity, and original-source action clear inside its approved modal. Do not adopt resume matching, application, rating, share, or qualification features |
+
+The public [real-estate category](https://mobbin.com/explore/mobile/app-categories/real-estate)
+includes Airbnb and Nextdoor examples. Category membership alone is not a reason to adopt their
+features. Mobbin's [Listing flows](https://mobbin.com/explore/mobile/flows/listing) page includes
+creating a sell/give-away post; its title must not be mistaken for a read-only results-list flow.
+
+### Additional housing references
+
+The authenticated [iOS real-estate search](https://mobbin.com/search/apps/ios?content_type=apps&sort=popularity&filter=appCategories.Real+Estate)
+returned nine apps: Airbnb, Nextdoor, Vrbo, Redfin, Opendoor, Trulia, Houzz, Compass, and Zillow.
+These are catalog results, not an exhaustive market comparison or a usability ranking.
+Zillow and Redfin are closer discovery references than Glassdoor because the inspected screens
+show homes for sale. Full catalog access still required Pro. Some preview captures failed or
+showed loading placeholders; those captures provide no evidence of app behavior.
+
+| Reference | Evidence inspected | Useful comparison and limits |
+|---|---|---|
+| [Zillow map/results highlight](https://mobbin.com/screens/a0d749ba-675e-4f37-b6d7-98b5fe339adc) | Rendered screenshot: search field, filter control with a count badge, map with price pins, result count and transaction label in a bottom panel, plus saved-search and navigation actions | Study how selected criteria and result context remain visible during exploration. Rentora keeps its municipality map and one list; exclude property pins, saved searches, favorites, planning/inbox tabs, and school-related search scope. Opening filters, applying/resetting them, and returning from details were not observed |
+| [Redfin map/results highlight](https://mobbin.com/screens/20316afb-d7e2-491d-9005-b5b1552cdf03) | Rendered screenshot: search/filter controls, price pins, a bottom results panel with transaction selector and result count, a partial card with a relative-age label, recommended ordering and saved-search action | Compare control visibility and the relationship between location context and results. Do not import exact pins, recommendations/rankings, saved searches, account tabs, or relative-age labels as a substitute for dated observations. The screenshot does not establish drawer gestures or filter behavior |
+| [Redfin detail highlight](https://mobbin.com/screens/dd7ba1cf-8546-45e6-815f-3957d9c700e5) | Rendered screenshot: media, for-sale label, price, bedroom/bathroom/area summary, exact address, map thumbnail, share/favorite controls and showing-request action | Study the compact factual summary and clear next action. Rentora retains its modal, permitted facts with provenance, municipality/neighborhood only, and original-source action. Exact addresses, map thumbnails locating properties, showings, favorites, sharing and walkthrough media are not additions to Phase 1 |
+| [Trulia catalog](https://mobbin.com/apps/trulia-ios-84ead256-a292-4554-a51e-79f7b5f08f91/c4e4a645-ac53-4b38-a3d5-7237724bb338/screens) | Catalog metadata reported 269 screens. Initial catalog output named Searching Trulia, Filtering listings and Listing detail flows; the inspected preview showed a registration/sign-in invitation, not discovery | A candidate for deeper search/filter/detail research, not evidence that those transitions work a particular way or that browsing requires an account. Rentora's guest entry remains unchanged |
+
+Trulia's named [search](https://mobbin.com/apps/trulia-ios-84ead256-a292-4554-a51e-79f7b5f08f91/c4e4a645-ac53-4b38-a3d5-7237724bb338/flows#55e84220-3724-47c5-b180-b1c57c8fc143),
+[filtering](https://mobbin.com/apps/trulia-ios-84ead256-a292-4554-a51e-79f7b5f08f91/c4e4a645-ac53-4b38-a3d5-7237724bb338/flows#aa63514b-ca78-4217-99ff-52fbc54ac4fb),
+and [detail](https://mobbin.com/apps/trulia-ios-84ead256-a292-4554-a51e-79f7b5f08f91/c4e4a645-ac53-4b38-a3d5-7237724bb338/flows#3ef0a177-0c24-4d93-b241-6582c00386ce)
+references are follow-up targets; their ordered transitions were not inspected.
+Capture dates and exact versions remain unverified for all three apps.
+
+Prioritize Zillow and Redfin for housing discovery composition, retain Glassdoor for card
+hierarchy and inline provenance, and use Trulia for further transition research when accessible.
+On/Turo remain secondary filtering references. Compass and Opendoor are additional housing
+candidates, while Vrbo concerns vacation stays and Houzz concerns remodeling; their catalogs
+were found, but their screens and flows were not inspected in this pass.
+
+These observations support keeping familiar location/filter/result/detail stages. They do not
+establish Rentora's globe entry, municipality-only map, status history, or modal usability.
+All inspected housing screens are native iOS references; validate the responsive browser PWA
+separately rather than importing native bottom navigation or gestures.
+
+### Validating the adapted Rentora flow
+
+Before describing the Rentora journey as validated:
+
+1. Follow the maintainer-confirmed Apply, filter-only Reset, and preserved detail-return rules
+   in the [frontend brief](./frontend-brief.md#interaction-and-layout). Confirm municipality-change
+   behavior before implementation. Competitor screenshots do not settle these decisions.
+2. After visual approval, test a fixture-backed prototype with target renters/buyers using
+   realistic tasks: choose a municipality and property type, refine the results, inspect
+   sourced facts and dates, then continue to the original source.
+3. Include no matches, unavailable approved data, missing/stale facts, and returning from
+   details. Check whether participants distinguish these states without prompting.
+4. Record completion without assistance, errors, time on task, and understanding of source
+   and date labels. Agree on pass criteria before sessions; report participant/device context
+   and observed results without claiming population-wide validation from a small pilot.
+5. Verify keyboard and screen-reader completion, modal focus, and mobile/desktop layouts.
+   Automated tests check behavior; they do not establish usability by themselves.
+
+No participant test was run during this reference research. A subsequent
+[first Figma wireframe pass](./frontend-brief.md#first-figma-wireframes) records the structure;
+it has no clickable connections and is not usability-validation evidence.
+
+### Recommendations for the approved brief
+
+- Keep the approved municipality/filter/list/detail journey. Public references show related
+  discovery structures; they do not require a new Rentora navigation model.
+- Use the Airbnb example to evaluate the relationship between map context, filtering, and item
+  preview, not as a visual template or property-location model.
+- Use On and Turo as bounded filter-to-results references. The public descriptions do not
+  establish apply/reset behavior or state preservation; use the subsequently confirmed
+  Rentora rules. Request behavior, focus announcements and state restoration still need tests.
+- Keep source attribution and observation dates as Rentora-specific facts beside card and
+  detail content. Glassdoor's visible compensation-source labels support studying inline
+  provenance, but its relative-age labels do not prove Rentora's status-history semantics.
+- Use Glassdoor's repeated card hierarchy as a comparison reference, not its personalized
+  home experience. The detail preview is a full screen; Rentora retains the approved modal.
+- Use Zillow and Redfin as primary housing composition references. Their map/result context
+  supports studying visible criteria and result counts, not adopting pins or a draggable drawer.
+- Do not infer that competitors' screenshots meet WCAG 2.2 AA. Rentora still needs keyboard,
+  screen-reader, contrast, and responsive checks.
+
+**Decision**: Add these links as research inputs to the frontend brief. Do not change approved
+scope or choose a visual identity from them. Screenshots, assets, and original copy were not
+vendored into the repository.
+
+**Follow-up**: With authorized access or user-supplied references, review Glassdoor's
+remaining search/filter/detail transitions and a complete real-estate discovery flow, including empty
+results and returning from details. Record canonical links, capture/version metadata when
+available, visible behavior, and the remaining inferences. A usability check with Rentora's
+target users must validate the adapted flow; Mobbin inclusion is not that validation.

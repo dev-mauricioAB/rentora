@@ -40,6 +40,23 @@ Managed Postgres before provisioning.
 unit and integration tests; Playwright for end-to-end map, filtering, listing-detail, and PWA
 smoke tests. Use a disposable or local PostgreSQL database for integration tests.
 
+**Agent quality guidance**: Repository-scoped Copilot instructions route frontend work through
+Impeccable and reader-facing prose through Humanizer. These are authoring tools, not runtime
+dependencies or substitutes for tests. Preserve feature requirements, factual provenance, and
+Spec Kit artifact structure. Read [PRODUCT.md](../../PRODUCT.md) and the approved
+[frontend brief](./frontend-brief.md). Scaffolding may proceed, but visual direction and final
+composition require approval before user-facing UI code. See [agent tooling](../../.github/README.md).
+
+**Localization**: Initially ship Brazilian Portuguese (`pt-BR`) only. Isolate UI messages using
+stable keys and format dates/numbers through locale-aware helpers so another locale and a
+language switcher can be added later without rewriting components. Additional translations and
+the visible switcher are deferred. Choose the smallest compatible localization approach during
+implementation planning; source facts must retain their original meaning and provenance.
+
+**Accessibility**: WCAG 2.2 AA, including keyboard-equivalent municipality selection and
+accessible modal focus behavior. Combine automated checks with manual keyboard and
+screen-reader validation; see [frontend brief](./frontend-brief.md).
+
 **Target Platform**: Installable, responsive browser PWA; NestJS API deployed to Fly.io. PWA
 installation is in scope; offline access to listing data is not specified.
 
@@ -93,6 +110,7 @@ specs/001-aggregate-property-listings/
 ├── plan.md
 ├── research.md
 ├── data-model.md
+├── frontend-brief.md
 ├── contracts/
 │   ├── public-api.md
 │   └── source-ingestion.md

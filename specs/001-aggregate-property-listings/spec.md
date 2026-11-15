@@ -15,6 +15,9 @@
 - Q: What should the main property score represent in Phase 1? → A: No overall score; show sourced factual highlights.
 - Q: Should the Phase 1 listing modal show an exact property location, or only the municipality/neighborhood and source link? → A: Show municipality/neighborhood only; do not show exact property locations in Phase 1.
 - Q: How should Phase 1 organize the property results after a municipality is selected? → A: One filterable list of factual property cards.
+- Q: When should filter changes update results? → A: After the visitor presses Apply.
+- Q: What should Reset clear? → A: Filters only; keep the selected municipality.
+- Q: Should closing details preserve filters and scroll position? → A: Yes; return to the same result position.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -144,6 +147,11 @@ source link without creating an account on this site.
   data includes neighborhood information. The site MUST NOT infer or fabricate a neighborhood.
 - **FR-016**: Matching property listings MUST be presented in one filterable list of factual
   property cards, not grouped into separate neighborhood or property-type sections.
+- **FR-017**: The initial interface MUST use Brazilian Portuguese (`pt-BR`). UI copy and
+  locale-sensitive formatting MUST allow future language switching without restructuring
+  components. Additional translations and a visible language switcher are deferred.
+- **FR-018**: The interface MUST meet WCAG 2.2 AA, including keyboard-accessible municipality
+  selection equivalent to the map, accessible filters, and accessible detail-modal navigation.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -182,6 +190,12 @@ source link without creating an account on this site.
   and selecting one returns only listings associated with it.
 - **SC-011**: Matching listings appear in one result list, and each card exposes factual
   source-attributed highlights without an overall score.
+- **SC-012**: All initial interface messages use `pt-BR`. Localization validation confirms that
+  UI messages and date/number formatting can use another locale without changing the component
+  structure; no additional language or visible switcher is required for Phase 1.
+- **SC-013**: A visitor can complete municipality selection, filtering, detail-modal review,
+  and source-link navigation with a keyboard. Accessibility review of the discovery flow meets
+  WCAG 2.2 AA through automated checks and manual keyboard/screen-reader validation.
 
 ## Assumptions
 
