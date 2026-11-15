@@ -28,6 +28,15 @@
   React, NestJS, Prisma, and map providers.
 - Keep changes focused; reuse existing helpers and components. Preserve type safety and handle
   failures explicitly.
+- Use TDD (red-green-refactor) for new/changed behavior and bug fixes: run a focused failing
+  test before implementation, confirm the expected behavioral failure, then implement and
+  refactor with tests green. Broken loaders/dependencies are not valid red evidence.
+- Use Jest for unit/component and isolated integration tests across the workspace. Use
+  Playwright only for the critical journeys in
+  `specs/001-aggregate-property-listings/adr-001-testing-strategy.md`; retain manual
+  usability/accessibility review. Do not add Vitest as a second unit runner.
+- Future task generation must include runner/CI setup and failing-test prerequisites before
+  dependent behavior work. Do not treat behavior tests as optional or defer them to polish.
 - Validate changed behavior with focused tests and existing checks. Docker Compose must support
   local web/API/database build validation when implemented. Never commit local credentials.
 - Do not claim success for commands or visual checks that were not run. Report blockers plainly.

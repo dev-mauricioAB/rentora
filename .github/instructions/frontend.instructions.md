@@ -44,3 +44,7 @@ applyTo: "apps/web/**,packages/ui/**"
   untranslated languages or a nonfunctional switcher. Do not translate source facts implicitly.
 - Inspect the rendered result at desktop and mobile sizes when runnable; test affected
   interactions and run the narrowest relevant build/type checks. Report unverified visual work.
+- Follow the accepted TDD/Jest decision in the active plan and ADR-001. Write and run a
+  focused Jest/Testing Library regression before behavior changes; preserve draft/Apply/Reset
+  semantics. Playwright covers only the named critical journeys, not every component variant.
+  Browser automation does not replace manual usability/accessibility review.

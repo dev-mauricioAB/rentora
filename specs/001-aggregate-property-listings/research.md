@@ -178,6 +178,7 @@ than copying Zelo-specific commands.
 |---|---|---|
 | Web/API layout | pnpm monorepo; React PWA plus NestJS modular monolith | Confirm exact package scripts and dependency versions during scaffolding |
 | Local validation | Docker Compose builds and runs web, API, and PostgreSQL together | Implement multi-stage images, health checks, safe env templates, and documented build/start/stop commands |
+| Testing workflow | Accepted TDD with Jest across the workspace; Playwright only for critical journeys | Implement the runner, red-green prerequisites, CI, and manual review gates in [ADR-001](./adr-001-testing-strategy.md) |
 | Listing sources | No source selected; candidates remain excluded | Verify at least one source's permission, data fields, attribution, and retention before ingestion |
 | Area boundary | Use the current statutory 22-municipality RMF list | Recheck law and choose a licensed geometry dataset before implementation |
 | Map renderer | MapLibre is the recommended candidate; keep provider switchable | Test globe-to-RMF transition and browser performance |

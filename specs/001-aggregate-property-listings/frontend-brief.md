@@ -414,8 +414,12 @@ selected blue direction.
 ## Implementation validation
 
 Use synthetic fixtures only in local or controlled validation until a source is approved.
+Follow [ADR-001](./adr-001-testing-strategy.md): use Jest/Testing Library tests before implementing
+changed rules or component behavior, then confirm red-green-refactor. Reserve Playwright for
+CF-01 discovery/filters, CF-02 details/source handoff and modal return, and CF-03 recovery.
 Cover the feature success criteria, required states, keyboard municipality selection, modal
-focus behavior, and locale formatting with focused tests. Once runnable, inspect desktop and
+focus behavior, and locale formatting. Automated browser checks do not replace maintainer
+usability review or manual WCAG 2.2 AA checks. Once runnable, inspect desktop and
 mobile rendering, run relevant type/build checks and Docker Compose validation, and run the
 Impeccable detector over changed UI targets. Report any checks that were not run.
 

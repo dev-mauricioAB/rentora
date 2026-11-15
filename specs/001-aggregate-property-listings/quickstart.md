@@ -84,18 +84,36 @@ The production image must not run schema migrations implicitly at startup.
 
 ## Automated Validation
 
+Follow [ADR-001](./adr-001-testing-strategy.md): write a focused Jest test, confirm the expected
+behavior failure, implement the smallest passing change, then refactor. Use targeted tests
+during development. Compilation/configuration failures do not count as the red step.
+Jest runs separately from Vite; scaffolding must verify the chosen TS/TSX transforms and
+React/NestJS integration before story work.
+
 After the corresponding scripts and tests exist:
 
 ```powershell
 pnpm test
+pnpm test:integration
 pnpm test:e2e
 pnpm build
 ```
 
-Expected coverage includes area scope, all rent/sale and house/apartment combinations,
-neighborhood filtering, no-result behavior, source attribution, stale/unknown status, detail-modal
-content, and the absence of scores and exact locations. E2E tests may use synthetic fixtures;
-they must not scrape real listing sources.
+`test` runs Jest unit/component tests without requiring a database; `test:integration` uses
+an explicitly configured isolated PostgreSQL database. `test:e2e` selects only Playwright
+tests tagged `@critical`. Keep type checking as a separate scaffolding/CI check, even when
+the test transform succeeds. An opt-in `test:watch` script supports the development TDD loop.
+
+Jest coverage includes area scope, all rent/sale and house/apartment combinations,
+neighborhood filtering, draft/applied transitions, source approval/attribution, stale/unknown
+status, locale formatting, and the absence of scores and exact locations. Critical browser
+coverage is CF-01 discovery/filter/PWA entry, CF-02 details/source handoff and modal return,
+and CF-03 recovery. Use controlled synthetic fixtures and explicit fault simulations;
+do not scrape or rely on real listing sources.
+
+Before integration, run affected suites and required type/build/CI checks. Manual keyboard,
+screen-reader, responsive/text-resizing, and maintainer usability review remain required;
+passing Playwright tests does not establish usability or WCAG compliance.
 
 ## Release Gate
 

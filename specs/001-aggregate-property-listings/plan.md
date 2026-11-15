@@ -36,9 +36,16 @@ does not provide the RMF municipal boundary data or a full map engine; see
 the production provider is not selected. Compare its region, latency, limits, and cost with Fly.io
 Managed Postgres before provisioning.
 
-**Testing**: Vitest and Testing Library for web/shared packages; NestJS test utilities for API
-unit and integration tests; Playwright for end-to-end map, filtering, listing-detail, and PWA
-smoke tests. Use a disposable or local PostgreSQL database for integration tests.
+**Testing**: TDD through red-green-refactor for new/changed behavior and bug fixes. Use Jest
+across web/API/shared packages, Testing Library for React components, and NestJS test utilities
+for API tests. Use an isolated local/disposable PostgreSQL database for integration tests.
+Playwright covers only the named critical discovery/filter, detail/source, and recovery
+journeys, selected by `@critical`; it does not replace participant usability or manual
+accessibility review. See [ADR-001](./adr-001-testing-strategy.md).
+
+Jest runs independently of Vite's plugins. Scaffolding must pin compatible stable transforms,
+DOM/test utilities, and verify TypeScript/TSX, ESM, aliases, and NestJS decorators. Keep type
+checks separate and do not introduce a second unit runner or bypass dependency conflicts.
 
 **Agent quality guidance**: Repository-scoped Copilot instructions route frontend work through
 Impeccable and reader-facing prose through Humanizer. These are authoring tools, not runtime
@@ -110,8 +117,10 @@ traffic are not yet known.
   boundaries; do not add microservices or framework-specific abstractions without a need.
 - **Security, privacy, and authorized data**: PASS FOR DESIGN. The source-ingestion boundary
   rejects unapproved sources; exact addresses and coordinates are not exposed.
-- **Verifiable quality**: PASS. Test the map scope, filters, empty results, listing details,
-  source attribution, status history, and unavailable data.
+- **Verifiable quality**: PASS FOR DESIGN. ADR-001 requires Jest tests before behavior
+  implementation and a critical-only Playwright suite. Test map scope, filters, empty results,
+  listing details, source attribution, status history, and unavailable data. Test runners and
+  red/green evidence remain implementation work.
 - **Reliable delivery**: PASS. Source failures and stale or missing data are represented
   explicitly, never as success-shaped or current facts.
 - **Local validation**: PASS. The planned Compose stack makes the build and integrated local
@@ -132,6 +141,7 @@ specs/001-aggregate-property-listings/
 ├── research.md
 ├── data-model.md
 ├── frontend-brief.md
+├── adr-001-testing-strategy.md
 ├── contracts/
 │   ├── public-api.md
 │   └── source-ingestion.md
@@ -175,6 +185,19 @@ web app follows presentation/use-case/port/infrastructure boundaries; the API is
 monolith. Keep domain types framework-independent and share only stable API contracts. This
 adapts the layer boundaries observed in the user-provided reference project without copying its
 code or adding a separate package for every feature.
+
+## Test-first implementation requirements
+
+Before story work, configure working Jest projects, React/NestJS test utilities, isolated
+integration fixtures, critical-only Playwright, and the root pnpm scripts defined in
+[ADR-001](./adr-001-testing-strategy.md). Include CI type/build/unit/integration/critical-browser
+checks and preserve Docker Compose validation.
+
+Generated tasks MUST include failing-test prerequisites for each behavior implementation,
+Jest rule/contract coverage, CF-01 through CF-03 browser checks, and manual usability/accessibility
+review. A valid red result must demonstrate the intended behavior failure, not broken tooling.
+Do not generate an exhaustive browser suite or defer behavior tests to a final polish phase.
+No `tasks.md` or application test scripts have been created yet.
 
 ## Complexity Tracking
 

@@ -9,7 +9,11 @@ description: "Task list template for feature implementation"
 
 **Prerequisites**: plan.md (required), spec.md (required for user stories), research.md, data-model.md, contracts/
 
-**Tests**: The examples below include test tasks. Tests are OPTIONAL - only include them if explicitly requested in the feature specification.
+**Tests**: Rentora requires TDD with Jest for new/changed behavior and bug fixes. Include
+focused failing-test prerequisites before dependent implementation, even if the feature spec
+does not repeat this engineering rule. Reserve Playwright for the accepted plan's critical
+browser journeys; keep manual usability/accessibility review. Documentation-only work needs
+no application tests.
 
 **Organization**: Tasks are grouped by user story to enable independent implementation and testing of each story.
 
@@ -53,6 +57,10 @@ description: "Task list template for feature implementation"
 - [ ] T002 Initialize [language] project with [framework] dependencies
 - [ ] T003 [P] Configure linting and formatting tools
 
+Include foundational tasks for compatible Jest TS/TSX/ESM and React/NestJS setup, isolated
+integration fixtures, critical-only Playwright, and pnpm/CI checks. Runner setup must work
+before story tests can establish valid behavioral failures. Use the active plan and testing ADR.
+
 ---
 
 ## Phase 2: Foundational (Blocking Prerequisites)
@@ -80,12 +88,14 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 1 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 1
 
-> **NOTE: Write these tests FIRST, ensure they FAIL before implementation**
+> Write focused tests FIRST and run them to confirm the expected behavior failure.
+> Configuration or compilation failures do not count. Add Playwright tasks only for a named
+> critical journey; use Jest for detailed rule/contract/component coverage.
 
-- [ ] T010 [P] [US1] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T011 [P] [US1] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T010 [P] [US1] Jest unit test for [rule] in packages/domain/src/[name].test.ts
+- [ ] T011 [P] [US1] Jest contract/integration test for [endpoint] in apps/api/test/[name].integration.test.ts
 
 ### Implementation for User Story 1
 
@@ -106,10 +116,10 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 2 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 2
 
-- [ ] T018 [P] [US2] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T019 [P] [US2] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T018 [P] [US2] Jest unit/component test for [behavior] in apps/web/tests/[name].test.tsx
+- [ ] T019 [P] [US2] Jest contract/integration test for [endpoint] in apps/api/test/[name].integration.test.ts
 
 ### Implementation for User Story 2
 
@@ -128,10 +138,10 @@ Examples of foundational tasks (adjust based on your project):
 
 **Independent Test**: [How to verify this story works on its own]
 
-### Tests for User Story 3 (OPTIONAL - only if tests requested) ⚠️
+### Tests for User Story 3
 
-- [ ] T024 [P] [US3] Contract test for [endpoint] in tests/contract/test_[name].py
-- [ ] T025 [P] [US3] Integration test for [user journey] in tests/integration/test_[name].py
+- [ ] T024 [P] [US3] Jest unit/component test for [behavior] in apps/web/tests/[name].test.tsx
+- [ ] T025 [P] [US3] Jest contract/integration test for [endpoint] in apps/api/test/[name].integration.test.ts
 
 ### Implementation for User Story 3
 
@@ -154,7 +164,7 @@ Examples of foundational tasks (adjust based on your project):
 - [ ] TXXX [P] Documentation updates in docs/
 - [ ] TXXX Code cleanup and refactoring
 - [ ] TXXX Performance optimization across all stories
-- [ ] TXXX [P] Additional unit tests (if requested) in tests/unit/
+- [ ] TXXX [P] Resolve remaining behavior/regression test gaps in the planned Jest test locations
 - [ ] TXXX Security hardening
 - [ ] TXXX Run quickstart.md validation
 
@@ -179,7 +189,9 @@ Examples of foundational tasks (adjust based on your project):
 
 ### Within Each User Story
 
-- Tests (if included) MUST be written and FAIL before implementation
+- Required behavior tests MUST be written and run to confirm the expected failure before implementation
+- Record actual failing-test prerequisites on dependent implementation tasks; do not parallelize across them
+- Implement the smallest passing change, then refactor with affected tests green
 - Models before services
 - Services before endpoints
 - Core implementation before integration
@@ -199,9 +211,9 @@ Examples of foundational tasks (adjust based on your project):
 ## Parallel Example: User Story 1
 
 ```bash
-# Launch all tests for User Story 1 together (if tests requested):
-Task: "Contract test for [endpoint] in tests/contract/test_[name].py"
-Task: "Integration test for [user journey] in tests/integration/test_[name].py"
+# Write independent tests for User Story 1, then run them before dependent implementation:
+Task: "Jest unit test for [rule] in packages/domain/src/[name].test.ts"
+Task: "Jest contract/integration test for [endpoint] in apps/api/test/[name].integration.test.ts"
 
 # Launch all models for User Story 1 together:
 Task: "Create [Entity1] model in src/models/[entity1].py"
