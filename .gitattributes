@@ -1,0 +1,2 @@
+# Keep the vendored Unix launcher executable through Git Bash on Windows.
+.github/skills/impeccable/scripts/impeccable text eol=lf
