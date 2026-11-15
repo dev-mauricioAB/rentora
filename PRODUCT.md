@@ -35,6 +35,11 @@ Visitors enter a globe-style map with Brazil and Florianopolis as the default ma
 an in-scope municipality, filter rent/sale and house/apartment, and optionally filter by a
 source-supported neighborhood. Results appear in one factual card list. Selecting a card
 opens a details modal with facts, source links, and available dated status observations.
+Municipality changes refresh with applied transaction/property filters, clear neighborhood
+selections, and preserve unapplied transaction/property drafts. Other filter edits and Reset
+require Apply; applying cleared types includes all supported types in the municipality.
+Mobile filter edits use one bottom sheet with persistent type choices and fixed Apply/Reset
+controls. Desktop keeps location/filter context in its sidebar.
 
 Local implementation validation must support Docker Compose for web, API, and PostgreSQL.
 The repository currently has planning documents and agent tooling, but no runnable app.
@@ -67,9 +72,13 @@ On 2026-11-15, the maintainer selected "Consulta clara" and confirmed the repres
 design brief. Its direction uses a deep-blue shell, light-blue context panels, white reading
 surfaces, workhorse sans-serif UI text, and compact factual summaries with a consistent
 source/date line. The [frontend brief](./specs/001-aggregate-property-listings/frontend-brief.md)
-records the selected palette roles and remaining review steps. Final responsive composition,
-control/state specifications, and runtime font decisions remain pending. No logo or imagery
-assets have been approved.
+records the selected palette roles and remaining review steps. After comparing alternatives,
+the maintainer retained the blue palette and selected `system-ui` for runtime typography;
+Noto Sans remains a Figma representation proxy. Mobile details use adaptive bottom-sheet modals,
+growing to full-screen only when reading space requires it; desktop keeps centered, bounded
+dialogs. The clickable prototype now demonstrates bounded mobile/desktop
+viewports; final responsive composition and control/state approval remain pending.
+No logo or imagery assets have been approved.
 
 ## Evidence on Hand
 
@@ -78,12 +87,32 @@ assets have been approved.
 - [Research](./specs/001-aggregate-property-listings/research.md): source and map evaluations.
 - [Public Mobbin research](./specs/001-aggregate-property-listings/research.md#public-mobbin-flow-research):
   inspected Airbnb, Glassdoor, Zillow, and Redfin previews, Trulia catalog metadata, and published
-  On/Turo filter-flow descriptions. These are inspiration, not Rentora usability-validation
+  On/Turo filter-flow descriptions, followed by readable Turo filter/results frames.
+  These are inspiration, not Rentora usability-validation
   evidence; full discovery transitions remain unverified.
 - [First Figma wireframes](./specs/001-aggregate-property-listings/frontend-brief.md#first-figma-wireframes):
   editable structural drafts the maintainer considers a good starting point. They use synthetic
   listings and a map placeholder, have no clickable connections, and have not yet been styled
   with the selected direction. Detailed screen review remains pending.
+- [Representative styled Figma slice](./specs/001-aggregate-property-listings/frontend-brief.md#representative-styled-figma-slice):
+  Consulta clara results, filters, details, states, and local control specimens. It is a separate
+  saved draft using Noto Sans as a `system-ui` representation proxy. All nine views and the
+  control sheet were visually checked; modal, copy, and focus-outline defects were corrected.
+  Maintainer approval, final modal viewport/scroll specifications, and browser accessibility
+  validation remain pending. No clickable connections or production UI were created.
+- [Clickable Figma prototype](./specs/001-aggregate-property-listings/frontend-brief.md#clickable-figma-prototype):
+  separate mobile/desktop flows and an explicit fictitious-scenario launcher. Browser checks
+  covered draft preservation, Reset/Apply, municipality changes, distinct A/B details, fixed
+  modal headers with scrolling bodies, and simulated query/map recovery. The prototype uses
+  two fictitious rental apartments and two municipalities, without real map geometry or feeds.
+  Figma's screen-reader representation intermittently omits visible controls after state changes.
+  Exact list-scroll and invoking-control focus restoration remain unverified. Final maintainer
+  approval and runtime accessibility/PWA validation are still required.
+- [Filter and map follow-up](./specs/001-aggregate-property-listings/research.md#filter-follow-up-and-map-alignment):
+  the mobile prototype now uses inline choices in one filter sheet and clearer detail type
+  roles. Politicometro's geographic breadcrumb and municipality map context were rechecked.
+  Rentora's globe-to-municipality journey still needs a map-focused prototype review; the
+  current placeholder is not approval of that interaction.
 - No implemented UI, licensed listing feed, or approved logo/imagery assets exist yet.
   Do not invent property facts, testimonials, endorsements, or success metrics.
 

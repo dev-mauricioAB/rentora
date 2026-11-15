@@ -51,13 +51,19 @@ Returns one flat list of property cards.
 Required query parameters:
 
 - `municipalityId`
-- `transactionType`: `rent` or `sale`
-- `propertyType`: `house` or `apartment`
 
 Optional query parameters:
 
+- `transactionType`: `rent` or `sale`; omission includes both transaction types.
+- `propertyType`: `house` or `apartment`; omission includes both property types.
 - `neighborhoodId`: accepted only when authorized data supports that neighborhood.
 - `cursor`, `limit`: pagination.
+
+Reset clears the client-side type and neighborhood drafts but retains the municipality.
+After Apply, cleared filters are omitted from the query; `municipalityId` remains required.
+Empty strings and unknown type values are invalid, not equivalent to omission.
+Changing municipality sends a query with the applied transaction/property filters and no
+neighborhood filter. Unapplied transaction/property edits are not sent by that change.
 
 Each card includes an internal listing ID, source-supported municipality/neighborhood, factual
 highlights, source name, original source link when available and permitted, current source status

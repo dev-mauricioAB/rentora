@@ -284,6 +284,42 @@ establish Rentora's globe entry, municipality-only map, status history, or modal
 All inspected housing screens are native iOS references; validate the responsive browser PWA
 separately rather than importing native bottom navigation or gestures.
 
+### Filter follow-up and map alignment
+
+Follow-up date: 2026-11-15.
+
+The authenticated [Turo filtering flow](https://mobbin.com/flows/4e15f54c-7a7f-4ac5-a54d-769a251f4b8f)
+exposed seven ordered screens. Two readable frames were inspected: screen 6 shows a dedicated
+filter surface with Reset, a selected-filter count, and a prominent "Show 200+ results" action;
+screen 7 shows the returned listing with the selected-filter badge still visible. A cropped
+picker frame also showed a Done control, but did not establish picker opening/dismissal
+behavior. Another capture failed. The complete interactive flow was not replayed, and exact
+capture date/app version remain unverified.
+
+The public On/Turo descriptions were rechecked and still describe choosing attributes before
+returning to filtered listings. Trulia's filtering catalog failed to reopen; no additional
+Trulia transition evidence was obtained. These limits do not justify inventing competitor
+behavior or treating native-app screenshots as PWA accessibility evidence.
+
+The Rentora prototype's transaction/property fields opened separate centered choice overlays.
+For its small, fixed option sets, these added context changes without a useful navigation step.
+The maintainer selected one mobile filter bottom sheet with inline choices and fixed Apply/Reset
+controls. This is a Rentora design decision informed by the references and the reported
+confusion. Reset-to-all, draft preservation, and immediate municipality changes remain the
+maintainer-confirmed rules; the Turo captures do not establish those semantics.
+
+The [Politicometro city map](https://www.politicometro.org/br?uf=sc&cidade=4205407) was rechecked.
+Once loaded, its breadcrumb showed Brazil, Sul, Santa Catarina, and Florianopolis; the map
+exposed named state/municipality regions and a labeled city-search alternative. Rentora's
+geographic narrowing and visible location context follow the same general intent, adapted
+to its official RMF-only service area.
+
+The current Rentora Figma prototype has a labeled map placeholder and two municipality choices.
+It does not demonstrate globe navigation, geographic drill-down, or map-to-results return
+behavior. Those remain a map-focused review requirement before final flow approval. Continue
+using clearly labeled conceptual states until municipal geometry rights are verified;
+do not invent shapes or copy Politicometro's assets, data, or implementation.
+
 ### Validating the adapted Rentora flow
 
 Before describing the Rentora journey as validated:

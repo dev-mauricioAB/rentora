@@ -15,9 +15,12 @@
 - Q: What should the main property score represent in Phase 1? → A: No overall score; show sourced factual highlights.
 - Q: Should the Phase 1 listing modal show an exact property location, or only the municipality/neighborhood and source link? → A: Show municipality/neighborhood only; do not show exact property locations in Phase 1.
 - Q: How should Phase 1 organize the property results after a municipality is selected? → A: One filterable list of factual property cards.
-- Q: When should filter changes update results? → A: After the visitor presses Apply.
-- Q: What should Reset clear? → A: Filters only; keep the selected municipality.
+- Q: When should filter edits update results? → A: After the visitor presses Apply; municipality selection is an immediate location change.
+- Q: What should Reset clear? → A: Transaction, property-type, and neighborhood filters; keep the selected municipality. Applying the cleared filters shows all supported transaction and property types there.
 - Q: Should closing details preserve filters and scroll position? → A: Yes; return to the same result position.
+- Q: What happens when the municipality changes? → A: Refresh with applied transaction/property filters and clear both applied and draft neighborhood selections.
+- Q: What happens to unapplied transaction/property edits when the municipality changes? → A: Preserve those draft edits; they still require Apply.
+- Q: How should details fit smaller screens? → A: An adaptive bottom-sheet modal on mobile, sized to content and growing nearly full-screen while leaving dimmed discovery context visible when space allows. Use full-screen only when reading space requires it. Keep a fixed title/close header and scrollable content; desktop uses a centered, height-limited modal.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -49,6 +52,14 @@ see matching factual property cards in one list, and understand when there are n
 5. **Given** neighborhood information is available for listings in a selected municipality,
    **When** a visitor chooses a neighborhood filter, **Then** only listings from that
    neighborhood are shown.
+6. **Given** applied filters and different draft edits, **When** a visitor changes municipality,
+   **Then** results refresh using the applied transaction/property filters, both neighborhood
+   selections clear, and the draft transaction/property edits remain unapplied.
+7. **Given** applied filters, **When** a visitor resets them, **Then** the municipality and
+   current results remain unchanged until Apply; applying shows all supported transaction
+   and property types in that municipality.
+8. **Given** draft transaction/property edits, **When** the visitor has not pressed Apply,
+   **Then** those edits do not change results or trigger a listing request.
 
 ---
 
@@ -81,6 +92,16 @@ property location, and no overall score.
    **Then** no overall score, rating, or ranking is presented.
 6. **Given** a listing with exact address or coordinates in its source data, **When** a visitor
    views its summary or details, **Then** the app shows no exact property location.
+7. **Given** details exceed the available viewport height, **When** a visitor scrolls the modal,
+   **Then** all detail content remains reachable and the title/close header remains available.
+8. **Given** an open detail modal, **When** the visitor closes it, **Then** the same applied
+   filters and result scroll position remain, and focus returns to the invoking control.
+9. **Given** a mobile viewport with sufficient reading space, **When** details open, **Then**
+   a bottom-anchored modal fits its content up to the available height, with dimmed discovery
+   context visible behind it.
+10. **Given** a short viewport or enlarged text leaves insufficient reading space in the sheet,
+    **When** details open, **Then** the modal may occupy the full viewport while keeping its
+    title/close header and all content reachable.
 
 ---
 
@@ -109,6 +130,9 @@ source link without creating an account on this site.
 - A source is unavailable or does not permit the proposed access or republication method.
 - No listings match a user's selected property type, transaction type, or service area.
 - A listing has no usable original source link.
+- A municipality changes while unapplied edits or a neighborhood selection exist.
+- Detail content exceeds the available viewport height.
+- A short mobile viewport or enlarged text requires a full-height detail modal.
 
 ## Requirements *(mandatory)*
 
@@ -152,6 +176,18 @@ source link without creating an account on this site.
   components. Additional translations and a visible language switcher are deferred.
 - **FR-018**: The interface MUST meet WCAG 2.2 AA, including keyboard-accessible municipality
   selection equivalent to the map, accessible filters, and accessible detail-modal navigation.
+- **FR-019**: Transaction, property-type, and neighborhood edits MUST remain drafts until Apply.
+  Reset MUST clear those draft filters while retaining the municipality and current results;
+  applying cleared filters MUST include all supported transaction and property types there.
+- **FR-020**: Changing municipality MUST refresh results using applied transaction/property
+  filters, clear applied and draft neighborhood selections, and preserve unapplied
+  transaction/property edits without applying them.
+- **FR-021**: Mobile details MUST use an adaptive, bottom-anchored modal sized to content up to
+  the available height, with dimmed discovery context visible when space allows. It MAY occupy
+  the full viewport when a short viewport or enlarged text requires more reading space.
+  Desktop details MUST use a centered, height-limited modal. Long detail content MUST scroll
+  internally while the title/close header remains available. Closing MUST preserve applied
+  filters and result position and restore focus.
 
 ### Key Entities *(include if feature involves data)*
 
@@ -196,6 +232,9 @@ source link without creating an account on this site.
 - **SC-013**: A visitor can complete municipality selection, filtering, detail-modal review,
   and source-link navigation with a keyboard. Accessibility review of the discovery flow meets
   WCAG 2.2 AA through automated checks and manual keyboard/screen-reader validation.
+- **SC-014**: Filter-state acceptance tests confirm that draft edits trigger no listing request,
+  municipality changes use applied filters while clearing both neighborhood selections and
+  retaining other drafts, and Reset requires Apply before unrestricted type results appear.
 
 ## Assumptions
 
