@@ -208,6 +208,24 @@ Humanizer must preserve Spec Kit structure and requirement semantics; Impeccable
 branding, product facts, or a new scope. Product context and visual direction should be approved
 before the first UI implementation.
 
+On 2026-11-15, the maintainer approved four additional repository-scoped skills: NestJS best
+practices, TanStack Query best practices, Playwright best practices, and Vercel React best
+practices. Individual skill folders were installed at the revisions recorded in
+[skills-lock.json](../../skills-lock.json). Telemetry and npm lifecycle scripts were disabled;
+no skill scripts or hooks were enabled. See [agent tooling](../../.github/README.md) for routing,
+license notices, and deliberate updates.
+
+Use the NestJS guidance within the modular-monolith/Prisma/shared-Zod boundaries; do not add
+accounts, TypeORM, queues, or events without a requirement. TanStack Query owns server data;
+Zustand owns small client-only state. Verify cancellation, retry, and freshness behavior against
+the pinned APIs, and do not silently substitute fixture data or persist offline listings.
+Use React advice that applies to Vite, without introducing Next.js, RSC, or SWR. Playwright
+guidance supports only ADR-001's critical browser journeys; manual review still applies.
+
+RHF/Zod community additions, the unverified Zustand guide, the shadcn skill's automatic shell
+workflow, and the beta-based Vitest skill were not installed. Existing form libraries and
+shadcn component choices remain in the application plan.
+
 ## Public Mobbin Flow Research
 
 Research date: 2026-11-15. This is inspiration from shipped products, not evidence that these

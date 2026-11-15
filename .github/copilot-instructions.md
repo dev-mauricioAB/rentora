@@ -47,6 +47,17 @@
   the relevant playbook. Follow `.github/instructions/frontend.instructions.md`.
 - For writing or revising reader-facing prose, load `.agents/skills/humanizer/SKILL.md`.
   Follow `.github/instructions/writing.instructions.md`, including for UI copy.
+- For NestJS work, load `.agents/skills/nestjs-best-practices/SKILL.md` and relevant rules.
+  Keep the modular monolith, Prisma, shared Zod contracts, and framework-independent domain;
+  do not introduce authentication, TypeORM, queues, or events from examples alone.
+- For query/cache work, load `.agents/skills/tanstack-query-best-practices/SKILL.md`.
+  Query keys use applied criteria, not unapplied drafts. Verify cancellation/retry semantics
+  against pinned APIs; preserve explicit error/stale states and do not add offline persistence.
+- For React implementation/performance review, load
+  `.agents/skills/vercel-react-best-practices/SKILL.md` alongside Impeccable when applicable.
+  Apply Vite-compatible guidance; do not introduce Next.js/RSC/SWR or speculative optimization.
+- For critical Playwright tests, load `.agents/skills/playwright-best-practices/SKILL.md`.
+  Follow the ADR's scope, use controlled fixtures, and do not suppress accessibility failures.
 - Skills improve craft; they do not replace requirements, accessibility checks, tests, factual
   verification, or maintainer approval. Do not rewrite unrelated documents as a side effect.
 - Review third-party scripts before execution. Do not enable hooks, launch bypass-permission

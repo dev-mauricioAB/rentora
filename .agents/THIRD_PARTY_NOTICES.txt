@@ -1,0 +1,55 @@
+Third-party engineering skill notices
+
+NestJS best practices
+Source: https://github.com/Kadajett/agent-nestjs-skills
+Revision: 3986e0cede33958e000f959031cbee0cd83c2941
+The skill's SKILL.md declares license: MIT. This upstream revision contains
+no standalone LICENSE, COPYING, or NOTICE file. The declaration is retained
+unchanged in the vendored skill.
+
+Vercel React best practices
+Source: https://github.com/vercel-labs/agent-skills
+Revision: 1a2c79d4e6c4a2283dc2c614b6538cbe1ed5ca62
+The skill's SKILL.md declares license: MIT. This upstream revision contains
+no standalone LICENSE, COPYING, or NOTICE file. The declaration is retained
+unchanged in the vendored skill.
+
+TanStack Query best practices
+Source: https://github.com/DeckardGer/tanstack-agent-skills
+Revision: b2fc14c974b2ca09b38de09c28237f240175205b
+Upstream LICENSE follows:
+
+MIT License
+
+Copyright (c) 2026 Deckard Gerritsen
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+Playwright best practices
+Source: https://github.com/currents-dev/playwright-best-practices-skill
+Revision: 0b75b5835a87de1fdd202ba965f3bc5a27738fdf
+Upstream LICENSE.md follows:
+
+Copyright © 2026 Currents Software Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.

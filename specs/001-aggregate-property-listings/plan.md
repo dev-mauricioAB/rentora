@@ -48,8 +48,10 @@ DOM/test utilities, and verify TypeScript/TSX, ESM, aliases, and NestJS decorato
 checks separate and do not introduce a second unit runner or bypass dependency conflicts.
 
 **Agent quality guidance**: Repository-scoped Copilot instructions route frontend work through
-Impeccable and reader-facing prose through Humanizer. These are authoring tools, not runtime
-dependencies or substitutes for tests. Preserve feature requirements, factual provenance, and
+Impeccable and reader-facing prose through Humanizer. Installed NestJS, TanStack Query,
+Playwright, and React skills support their matching implementation/review tasks. These are
+authoring tools, not runtime dependencies or substitutes for tests. Preserve feature
+requirements, factual provenance, and
 Spec Kit artifact structure. Read [PRODUCT.md](../../PRODUCT.md) and the approved
 [frontend brief](./frontend-brief.md). Scaffolding may proceed, but visual direction and final
 composition require approval before user-facing UI code. See [agent tooling](../../.github/README.md).
