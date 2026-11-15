@@ -13,6 +13,10 @@ The [implementation plan](./specs/001-aggregate-property-listings/plan.md) owns 
 package-boundary, Docker, and deployment decisions. These are preferences to verify at
 implementation time, not existing application capabilities.
 
+The maintainer selected shadcn/ui with Tailwind as the UI component foundation on 2026-11-15.
+Components are not installed yet. This choice does not approve shadcn's default theme or a
+Rentora visual identity; the plan owns component sourcing, compatibility, and maintenance.
+
 ## Users
 
 Prospective renters and buyers considering a house or apartment in the officially defined
@@ -59,7 +63,13 @@ The repository currently has planning documents and agent tooling, but no runnab
 The product name is Rentora. UI prose should be plain, factual, and clear about uncertainty.
 Politicometro is the user's interaction reference for map-to-location navigation; its assets,
 colors, and typography are not an approved Rentora visual identity.
-No logo, palette, typefaces, or visual direction have been approved.
+On 2026-11-15, the maintainer selected "Consulta clara" and confirmed the representative Figma
+design brief. Its direction uses a deep-blue shell, light-blue context panels, white reading
+surfaces, workhorse sans-serif UI text, and compact factual summaries with a consistent
+source/date line. The [frontend brief](./specs/001-aggregate-property-listings/frontend-brief.md)
+records the selected palette roles and remaining review steps. Final responsive composition,
+control/state specifications, and runtime font decisions remain pending. No logo or imagery
+assets have been approved.
 
 ## Evidence on Hand
 
@@ -71,9 +81,10 @@ No logo, palette, typefaces, or visual direction have been approved.
   On/Turo filter-flow descriptions. These are inspiration, not Rentora usability-validation
   evidence; full discovery transitions remain unverified.
 - [First Figma wireframes](./specs/001-aggregate-property-listings/frontend-brief.md#first-figma-wireframes):
-  editable structural drafts awaiting maintainer review. They use synthetic listings and a map
-  placeholder, have no clickable connections, and do not establish an approved visual identity.
-- No implemented UI, licensed listing feed, or approved brand assets exist yet.
+  editable structural drafts the maintainer considers a good starting point. They use synthetic
+  listings and a map placeholder, have no clickable connections, and have not yet been styled
+  with the selected direction. Detailed screen review remains pending.
+- No implemented UI, licensed listing feed, or approved logo/imagery assets exist yet.
   Do not invent property facts, testimonials, endorsements, or success metrics.
 
 ## Product Principles

@@ -25,9 +25,9 @@ access-control bypass is planned.
 **Language/Version**: TypeScript; Node.js 24 LTS is the planning baseline. Revalidate supported
 versions and pin the latest compatible stable TypeScript release when scaffolding.
 
-**Primary Dependencies**: pnpm workspaces; React 19+, Vite, Tailwind, Zustand, TanStack Query,
-React Router, Zod, and React Hook Form; NestJS and dotenv for local configuration; Prisma ORM's
-latest stable GA release; Docker Engine and Docker Compose v2 for local stack validation.
+**Primary Dependencies**: pnpm workspaces; React 19+, Vite, Tailwind, shadcn/ui, Zustand,
+TanStack Query, React Router, Zod, and React Hook Form; NestJS and dotenv for local configuration;
+Prisma ORM's latest stable GA release; Docker Engine and Docker Compose v2 for local stack validation.
 MapLibre GL JS is the recommended map-rendering candidate. The user-preferred `svg-maps` package
 does not provide the RMF municipal boundary data or a full map engine; see
 [research.md](./research.md).
@@ -46,6 +46,27 @@ dependencies or substitutes for tests. Preserve feature requirements, factual pr
 Spec Kit artifact structure. Read [PRODUCT.md](../../PRODUCT.md) and the approved
 [frontend brief](./frontend-brief.md). Scaffolding may proceed, but visual direction and final
 composition require approval before user-facing UI code. See [agent tooling](../../.github/README.md).
+
+**UI component foundation**: The maintainer selected shadcn/ui on 2026-11-15. Use its
+source-distributed components with Tailwind for common controls and modal behavior. This fits
+the planned stack and allows Rentora-specific source/date and status-history presentation.
+Material UI was considered for its comprehensive packaged components; combining its styling
+system with Tailwind would add conventions to manage. Building all controls from scratch would
+add accessibility and interaction maintenance without a demonstrated Phase 1 need.
+
+The trade-off is ownership: imported shadcn/ui code becomes repository code, so upstream fixes
+must be reviewed and integrated alongside local changes. Keep reusable controls in the web
+presentation layer; do not add a shared UI package without a concrete reuse need. Domain rules,
+shared contracts, and API code must not depend on UI components. Import only required controls,
+reuse approved variants, and avoid combining shadcn/ui and Material UI in Phase 1.
+
+At scaffolding, verify compatible React/Tailwind releases, choose one supported primitive
+implementation, and pin dependencies. Record the source revision of imported components so
+updates can be reviewed. No components are installed yet. The choice approves neither a default
+shadcn theme nor a palette, font, Figma kit, or final composition. See the official
+[shadcn/ui introduction](https://ui.shadcn.com/docs),
+[theming guidance](https://ui.shadcn.com/docs/theming), and
+[MUI Tailwind integration](https://mui.com/material-ui/integrations/tailwindcss/tailwindcss-v4/).
 
 **Localization**: Initially ship Brazilian Portuguese (`pt-BR`) only. Isolate UI messages using
 stable keys and format dates/numbers through locale-aware helpers so another locale and a

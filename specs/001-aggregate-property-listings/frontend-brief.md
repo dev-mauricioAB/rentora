@@ -1,7 +1,8 @@
 # Frontend implementation brief
 
 Approved behavior and accessibility baseline: 2026-11-15.
-Visual identity and final composition: not yet approved.
+Selected visual direction and representative Figma brief: Consulta clara, 2026-11-15.
+Final responsive composition and component/state specifications: not yet approved.
 
 ## Job and outcome
 
@@ -9,6 +10,10 @@ Help a guest renter or buyer narrow a municipality and property type, understand
 and their dates, then continue to the original listing. This is an Impeccable Operate surface.
 Use [PRODUCT.md](../../PRODUCT.md) for audience and language context and
 [spec.md](./spec.md) for product requirements. This brief does not override either document.
+
+The maintainer confirmed mixed phone and computer use with neither clearly dominant as the
+working usage assumption. This is not participant research. No additional brand restrictions
+or existing assets were supplied for this direction round.
 
 ## Interaction and layout
 
@@ -68,11 +73,74 @@ components. A new message catalog should support another locale without restruct
 Do not implement additional translations or a visible language switcher now.
 Keep source names, facts, units, and observation instants faithful to their provenance.
 
+## UI component foundation
+
+shadcn/ui with Tailwind was approved on 2026-11-15. The [plan](./plan.md) owns sourcing,
+compatibility, presentation-layer boundaries, and update maintenance. No library components
+are installed yet, and the neutral Figma wireframe buttons do not establish the implementation
+library or final appearance.
+
+The first visual review should cover the required buttons, labeled filters, municipality
+selector, detail dialog, source links, loading indicators, and inline failure messages.
+Use these alongside Rentora-specific factual cards, source/date information, and status
+history. Add components only when the flow requires them.
+
+Proposed button hierarchy for review: emphasize Apply in the filter area and the usable
+original-source action in details; keep Reset lower emphasis and separate from Apply.
+Reset is not a destructive action. Review hover, pressed, focus, disabled, and loading states
+with the palette. These treatments remain proposals until visual approval.
+
+## Visual planning sequence
+
+1. Discovery completed: mixed phone/computer use, no additional brand restrictions. Preserve
+   the approved flow, locale, and accessibility target; validate real use conditions later.
+2. Direction selection completed through Impeccable new-work and concept-seed. The maintainer
+   selected Consulta clara and confirmed the representative design brief. The local selection
+   reference is `seed:904b7913eac7ceae`; the selected grounded candidate was first in the list.
+3. Next, review a representative Figma slice: mobile and desktop results, filters, a factual card,
+   detail content, and missing/stale/failure treatments. Compare palette roles, typography,
+   spacing, control variants, and focus/contrast specifications together. Label synthetic data.
+4. After approval of the slice, extend the patterns and connect the confirmed flow. Resolve
+   municipality-change behavior before connecting that transition. Figma does not verify real
+   browser focus, keyboard behavior, or scroll restoration.
+5. Hand off the approved composition and component/state specifications to task planning.
+   Keep UI implementation dependent on approval and use the validation section below once
+   runnable. Scaffolding and non-UI task planning remain independent of visual approval.
+
+The shape brief is confirmed. The next stage is the representative Figma pass, not UI code or
+a direction contract. DESIGN.md must not claim a shipped system at this stage.
+
+### Selected direction: Consulta clara
+
+- Use the selected study's deep-blue shell (`#173A5E`), pale-blue context (`#E9F2F8`), white
+  reading surfaces (`#FFFFFF`), and blue primary action (`#1F5F8B`). These are direction values,
+  not a complete implemented token system. Semantic failure/warning colors and control states
+  still need specifications and review; brand blue does not certify a property fact.
+- Use workhorse sans-serif UI typography and compact, consistent spacing. The selected study
+  uses a system sans-serif stack. Resolve the runtime stack, sizes, and responsive behavior in
+  the Figma/code handoff rather than treating the wireframes' Inter as a brand requirement.
+- Keep the approved desktop context beside one list and the mobile location/filter/list order.
+  The signature is a consistently positioned source/date line on every factual summary,
+  with explicit missing or unconfirmed information nearby. Opening details must preserve
+  applied criteria and result position; the study does not implement that interaction.
+- The maintainer confirmed the next review scope: mobile and desktop results, filters, one
+  factual card, detail content, and missing/stale/error states. Review button hierarchy and
+  focus/contrast specifications before extending the design to the full prototype.
+
+The selected local study is a static first-viewport exploration with synthetic data and a
+labeled map placeholder. It is not React/shadcn implementation, a clickable Figma prototype,
+or evidence of usability or WCAG compliance. Desktop inspection found no horizontal control
+clipping at the observed 1358px viewport, a minimum measured text contrast of 6.55:1, and
+controls at least 44px high. Mobile reflow, full keyboard/modal behavior, and screen-reader
+validation remain unverified.
+
 ## Before the first UI code
 
 1. Read the constitution, feature spec, plan, PRODUCT.md, this brief, and frontend instructions.
-2. Use Impeccable's new-work workflow to present and obtain approval for the visual direction
-   and final composition. Do not quietly choose colors, fonts, logos, imagery, or map styling.
+2. Inherit Consulta clara and use the relevant Impeccable workflow to resolve and obtain approval
+   for the final responsive composition and component/state specifications. Do not reopen the
+   direction round unless the maintainer requests a change, or quietly choose logos, imagery,
+   or map styling.
 3. Record the approved visual direction using that workflow. A future DESIGN.md must distinguish
    approved direction from tokens/components actually implemented; do not fabricate shipped UI.
 4. Load the relevant playbook and craft floor immediately before UI edits. Build this app
@@ -80,8 +148,9 @@ Keep source names, facts, units, and observation instants faithful to their prov
    chosen code-first default for future landing/showcase surfaces.
 5. Reuse UI components and shared styling when they exist; preserve domain/package boundaries.
 
-Scaffolding and task planning may proceed before visual approval. User-facing UI implementation
-must wait for that approval. No runnable application or visual identity exists yet.
+Scaffolding and task planning may proceed before final composition approval. User-facing UI
+implementation must wait for that approval. A direction is selected, but no runnable app or
+complete implemented visual system exists yet.
 
 ## Discovery references
 
@@ -116,7 +185,8 @@ synthetic listings. Inter and neutral tones are temporary wireframe conventions,
 brand choices. The map is a labeled placeholder; no municipal geometry or source integration
 is implemented.
 
-This first pass is awaiting maintainer review and has no clickable prototype connections.
+The maintainer considers this first pass a good starting point. Detailed screen review remains
+pending, and it has no clickable prototype connections.
 The detail frames illustrate modal
 content and return behavior; actual overlay interaction, keyboard focus and scroll restoration
 remain to be implemented and tested. Review the structure before connecting transitions and
